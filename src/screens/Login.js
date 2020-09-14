@@ -13,27 +13,53 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import EnIcon from 'react-native-vector-icons/Entypo';
 
 function Login() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    username: 'null',
+    password: 'null',
+  });
   const [isDisable, setIsDisable] = useState(true);
   const [encrypt, setEncrypt] = useState(true);
 
   const onTextChange = (key, text) => {
     switch (key) {
       case 'username':
-        setData({
-          ...data,
-          username: text,
-        });
+        if (/^[a-z0-9_-]{3,15}$/.test(text)) {
+          setData({
+            ...data,
+            username: text,
+          });
+        } else {
+          setData({
+            ...data,
+            username: null,
+          });
+        }
         break;
       case 'password':
-        setData({
-          ...data,
-          password: text,
-        });
+        if (
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$/.test(text)
+        ) {
+          setData({
+            ...data,
+            password: text,
+          });
+        } else {
+          setData({
+            ...data,
+            password: null,
+          });
+        }
         break;
     }
 
-    if (!data.username || !data.password) {
+    if (
+      !data.username ||
+      data.username == null ||
+      data.username == 'null' ||
+      !data.password ||
+      data.password == null ||
+      data.password == 'null'
+    ) {
       setIsDisable(true);
     } else {
       setIsDisable(false);
@@ -47,7 +73,7 @@ function Login() {
       ]}>
       <Image
         resizeMode="center"
-        style={Styles.logo}
+        style={([Styles.logo], {marginBottom: 24})}
         source={require('../assets/Instagram_logo.png')}
       />
 
@@ -56,17 +82,26 @@ function Login() {
           <TextInput
             style={styles.input}
             placeholderTextColor={Colors.secondaryTextColor}
-            placeholder="username"
+            placeholder="Username"
             onChangeText={(e) => onTextChange('username', e)}
           />
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="check" size={20} color={Colors.check} />
+          {!data.username || data.username == 'null' ? null : (
+            <Icon name="check" size={20} color={Colors.check} />
+          )}
         </View>
       </View>
-      <View>
-        <Text></Text>
-      </View>
+      {!data.username ? (
+        <View style={{width: '80%', marginBottom: 16}}>
+          {/* ^[a-z0-9_-]{3,15}$ */}
+          <Text style={{color: Colors.error}}>
+            Username must be consist of a-z, 0-9, underscore, hyphen, minimum 3
+            and maximum 15 charchter long
+          </Text>
+        </View>
+      ) : null}
+
       <View style={styles.inputContainer}>
         <View style={{flex: 7}}>
           <TextInput
@@ -87,6 +122,17 @@ function Login() {
           </TouchableOpacity>
         </View>
       </View>
+
+      {!data.password ? (
+        <View style={{width: '80%', marginBottom: 16}}>
+          {/* ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$ */}
+          <Text style={{color: Colors.error}}>
+            Password must be consist of atlist a-z, A-Z, 0-9, special character,
+            minimum 8 and maximum 15 charchter long
+          </Text>
+        </View>
+      ) : null}
+
       <TouchableOpacity
         style={isDisable ? styles.ButtonDisable : styles.ButtonEnable}
         disabled={isDisable}>
@@ -94,6 +140,20 @@ function Login() {
           <Text style={styles.buttonText}>Log in</Text>
         </View>
       </TouchableOpacity>
+
+      <View
+        style={{
+          marginTop: 128,
+          justifyContent: 'center',
+          flexDirection: 'row',
+        }}>
+        <Text style={{color: Colors.secondaryTextColor}}>
+          Don't have an account?
+        </Text>
+        <TouchableOpacity>
+          <Text style={{color: Colors.acent}}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

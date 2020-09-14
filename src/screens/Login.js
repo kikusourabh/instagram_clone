@@ -9,10 +9,13 @@ import {
 } from 'react-native';
 import {Styles} from '../cofig/Styles';
 import {Colors} from '../cofig/Colors';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import EnIcon from 'react-native-vector-icons/Entypo';
 
 function Login() {
   const [data, setData] = useState({});
   const [isDisable, setIsDisable] = useState(true);
+  const [encrypt, setEncrypt] = useState(true);
 
   const onTextChange = (key, text) => {
     switch (key) {
@@ -49,23 +52,40 @@ function Login() {
       />
 
       <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholderTextColor={Colors.secondaryTextColor}
-          placeholder="username"
-          onChangeText={(e) => onTextChange('username', e)}
-        />
+        <View style={{flex: 7}}>
+          <TextInput
+            style={styles.input}
+            placeholderTextColor={Colors.secondaryTextColor}
+            placeholder="username"
+            onChangeText={(e) => onTextChange('username', e)}
+          />
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Icon name="check" size={20} color={Colors.check} />
+        </View>
       </View>
       <View>
         <Text></Text>
       </View>
       <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholderTextColor={Colors.secondaryTextColor}
-          placeholder="Password"
-          onChangeText={(e) => onTextChange('password', e)}
-        />
+        <View style={{flex: 7}}>
+          <TextInput
+            style={styles.input}
+            placeholderTextColor={Colors.secondaryTextColor}
+            placeholder="Password"
+            secureTextEntry={encrypt}
+            onChangeText={(e) => onTextChange('password', e)}
+          />
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => setEncrypt(!encrypt)}>
+            <EnIcon
+              name={encrypt ? 'eye-with-line' : 'eye'}
+              size={20}
+              color={Colors.acent}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
       <TouchableOpacity
         style={isDisable ? styles.ButtonDisable : styles.ButtonEnable}
@@ -110,6 +130,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     marginBottom: 16,
+    flexDirection: 'row',
   },
   input: {
     height: 56,

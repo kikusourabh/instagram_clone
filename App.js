@@ -1,7 +1,7 @@
 import React from 'react';
-import Login from './src/screens/Login';
+import AuthRout from './src/routes/AuthRout';
 
 const App = () => {
-  return <Login />;
+  return <AuthRout />;
 };
 export default App;

@@ -6,9 +6,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import EnIcon from 'react-native-vector-icons/Entypo';
 import Error from '../components/Error';
 
-function Login({navigation}) {
+function Registration({navigation}) {
   const [data, setData] = useState({
     username: 'null',
+    email: 'null',
     password: 'null',
   });
   const [isDisable, setIsDisable] = useState(true);
@@ -26,6 +27,23 @@ function Login({navigation}) {
           setData({
             ...data,
             username: null,
+          });
+        }
+        break;
+      case 'email':
+        if (
+          /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(
+            text,
+          )
+        ) {
+          setData({
+            ...data,
+            email: text,
+          });
+        } else {
+          setData({
+            ...data,
+            email: null,
           });
         }
         break;
@@ -48,17 +66,18 @@ function Login({navigation}) {
 
     if (
       !data.username ||
-      data.username == null ||
       data.username == 'null' ||
       !data.password ||
-      data.password == null ||
-      data.password == 'null'
+      data.password == 'null' ||
+      !data.email ||
+      data.email == 'null'
     ) {
       setIsDisable(true);
     } else {
       setIsDisable(false);
     }
   };
+
   return (
     <View
       style={[
@@ -89,8 +108,27 @@ function Login({navigation}) {
       {!data.username ? (
         <Error
           message="Username must be consist of a-z, 0-9, underscore, hyphen, minimum 3
-        and maximum 15 charchter long"
+          and maximum 15 charchter long"
         />
+      ) : null}
+
+      <View style={Styles.inputContainer}>
+        <View style={{flex: 7}}>
+          <TextInput
+            style={Styles.input}
+            placeholderTextColor={Colors.secondaryTextColor}
+            placeholder="Email"
+            onChangeText={(e) => onTextChange('email', e)}
+          />
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          {!data.email || data.email == 'null' ? null : (
+            <Icon name="check" size={20} color={Colors.check} />
+          )}
+        </View>
+      </View>
+      {!data.email ? (
+        <Error message="Email is not valid, valid email eg: johncarter@gmail.com" />
       ) : null}
 
       <View style={Styles.inputContainer}>
@@ -117,7 +155,7 @@ function Login({navigation}) {
       {!data.password ? (
         <Error
           message="Password must be consist of atlist a-z, A-Z, 0-9, special character,
-        minimum 8 and maximum 15 charchter long"
+          minimum 8 and maximum 15 charchter long"
         />
       ) : null}
 
@@ -125,7 +163,7 @@ function Login({navigation}) {
         style={isDisable ? Styles.ButtonDisable : Styles.ButtonEnable}
         disabled={isDisable}>
         <View>
-          <Text style={Styles.buttonText}>Log in</Text>
+          <Text style={Styles.buttonText}>Sign up</Text>
         </View>
       </TouchableOpacity>
 
@@ -136,14 +174,14 @@ function Login({navigation}) {
           flexDirection: 'row',
         }}>
         <Text style={{color: Colors.secondaryTextColor}}>
-          Don't have an account?
+          Already have an account?
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
-          <Text style={{color: Colors.acent}}>Sign up</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={{color: Colors.acent}}>Log in</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-export default Login;
+export default Registration;

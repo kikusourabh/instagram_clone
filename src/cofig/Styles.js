@@ -6,4 +6,8 @@ export const Styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
   },
+
+  logo: {
+    width: '50%',
+  },
 });

@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
 import {Styles} from '../cofig/Styles';
 import {Colors} from '../cofig/Colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -77,10 +70,10 @@ function Login() {
         source={require('../assets/Instagram_logo.png')}
       />
 
-      <View style={styles.inputContainer}>
+      <View style={Styles.inputContainer}>
         <View style={{flex: 7}}>
           <TextInput
-            style={styles.input}
+            style={Styles.input}
             placeholderTextColor={Colors.secondaryTextColor}
             placeholder="Username"
             onChangeText={(e) => onTextChange('username', e)}
@@ -102,10 +95,10 @@ function Login() {
         </View>
       ) : null}
 
-      <View style={styles.inputContainer}>
+      <View style={Styles.inputContainer}>
         <View style={{flex: 7}}>
           <TextInput
-            style={styles.input}
+            style={Styles.input}
             placeholderTextColor={Colors.secondaryTextColor}
             placeholder="Password"
             secureTextEntry={encrypt}
@@ -134,10 +127,10 @@ function Login() {
       ) : null}
 
       <TouchableOpacity
-        style={isDisable ? styles.ButtonDisable : styles.ButtonEnable}
+        style={isDisable ? Styles.ButtonDisable : Styles.ButtonEnable}
         disabled={isDisable}>
         <View>
-          <Text style={styles.buttonText}>Log in</Text>
+          <Text style={Styles.buttonText}>Log in</Text>
         </View>
       </TouchableOpacity>
 
@@ -159,43 +152,3 @@ function Login() {
 }
 
 export default Login;
-
-const styles = StyleSheet.create({
-  ButtonEnable: {
-    height: 45,
-    width: '80%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.acent,
-    borderRadius: 5,
-  },
-  ButtonDisable: {
-    height: 45,
-    width: '80%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.acentdisable,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: Colors.white,
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  inputContainer: {
-    height: 56,
-    width: '80%',
-    backgroundColor: Colors.secondaryColor,
-    borderColor: Colors.secondaryTextColor,
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 16,
-    flexDirection: 'row',
-  },
-  input: {
-    height: 56,
-    width: '100%',
-    paddingStart: 16,
-    paddingEnd: 16,
-  },
-});

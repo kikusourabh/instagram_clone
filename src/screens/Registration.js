@@ -5,6 +5,9 @@ import {Colors} from '../cofig/Colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EnIcon from 'react-native-vector-icons/Entypo';
 import Error from '../components/Error';
+import { registerUser } from "../api/AuthApi";
+import { useDispatch } from "react-redux";
+import { userAuthSignIn } from "../store/actions/AuthAction";
 
 function Registration({navigation}) {
   const [data, setData] = useState({
@@ -14,6 +17,7 @@ function Registration({navigation}) {
   });
   const [isDisable, setIsDisable] = useState(true);
   const [encrypt, setEncrypt] = useState(true);
+  const [authError,setAuthError] = useState(false);
 
   const onTextChange = (key, text) => {
     switch (key) {
@@ -78,6 +82,30 @@ function Registration({navigation}) {
     }
   };
 
+  const register = ()=>{
+    if (
+      !data.username ||
+      data.username == 'null' ||
+      !data.password ||
+      data.password == 'null' ||
+      !data.email ||
+      data.email == 'null'
+    ) {
+      setIsDisable(true);
+    } else {
+      registerUser(data,(err,token)=>{
+        if (!err) {
+          useDispatch(userAuthSignIn(token))
+        }else{
+          if (err==="user already exist") {
+            setAuthError(true)
+          }else{
+            setAuthError(false)
+          }  
+        }
+      })
+    }
+  }
   return (
     <View
       style={[
@@ -161,12 +189,15 @@ function Registration({navigation}) {
 
       <TouchableOpacity
         style={isDisable ? Styles.ButtonDisable : Styles.ButtonEnable}
-        disabled={isDisable}>
+        disabled={isDisable} onPress={register}>
         <View>
           <Text style={Styles.buttonText}>Sign up</Text>
         </View>
       </TouchableOpacity>
-
+      {authError?(<Error style={{marginTop:16}}
+          message="username and email is already exist with another user!"
+        />):null}
+      
       <View
         style={{
           marginTop: 128,

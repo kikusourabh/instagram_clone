@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {Colors} from '../cofig/Colors';
+import { View, Text } from 'react-native';
+import { Colors } from '../cofig/Colors';
 
-function Error({message}) {
+function Error({ style, message }) {
   return (
-    <View style={{width: '80%', marginBottom: 16}}>
-      <Text style={{color: Colors.error}}>{message}</Text>
+    <View style={[style, { width: '80%', marginBottom: 16 }]}>
+      <Text style={{ color: Colors.error }}>{message}</Text>
     </View>
   );
 }

@@ -14,7 +14,9 @@ function RootRoute() {
         );
     } else {
         return (
+
             <HomeRoute />
+
         );
     }
 

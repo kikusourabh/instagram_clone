@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { userAuthSignIn } from "../store/actions/AuthAction";
 
 function Registration({navigation}) {
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     username: 'null',
     email: 'null',
@@ -95,7 +96,9 @@ function Registration({navigation}) {
     } else {
       registerUser(data,(err,token)=>{
         if (!err) {
-          useDispatch(userAuthSignIn(token))
+          console.log("token: "+token);
+          
+          dispatch(userAuthSignIn(token))
         }else{
           if (err==="user already exist") {
             setAuthError(true)

@@ -22,3 +22,18 @@ export const registerUser = async (user, callback) => {
             callback(err, null)
         })
 }
+
+export const loginUser = async (user, callback) => {
+    Axios.post(BASE_URL + "login_", user)
+        .then(res => {
+            const data = res.data
+            if (data.error) {
+                callback(data.error, null)
+            } else {
+                callback(null, data.token)
+            }
+        })
+        .catch(err => {
+            callback(err, null)
+        })
+}

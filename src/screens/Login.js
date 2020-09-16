@@ -5,14 +5,19 @@ import {Colors} from '../cofig/Colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EnIcon from 'react-native-vector-icons/Entypo';
 import Error from '../components/Error';
+import { useDispatch } from "react-redux";
+import { userAuthSignIn } from "../store/actions/AuthAction";
+import { loginUser } from '../api/AuthApi';
 
 function Login({navigation}) {
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     username: 'null',
     password: 'null',
   });
   const [isDisable, setIsDisable] = useState(true);
   const [encrypt, setEncrypt] = useState(true);
+  const [authError,setAuthError] = useState(false);
 
   const onTextChange = (key, text) => {
     switch (key) {
@@ -59,6 +64,30 @@ function Login({navigation}) {
       setIsDisable(false);
     }
   };
+  const login = ()=>{
+    if (
+      !data.username ||
+      data.username == 'null' ||
+      !data.password ||
+      data.password == 'null' 
+    ) {
+      setIsDisable(true);
+    } else {
+      loginUser(data,(err,token)=>{
+        if (!err) {
+          console.log("token: "+token);
+          
+          dispatch(userAuthSignIn(token))
+        }else{
+          if (err==="user already exist") {
+            setAuthError(true)
+          }else{
+            setAuthError(false)
+          }  
+        }
+      })
+    }
+  }
   return (
     <View
       style={[
@@ -123,11 +152,16 @@ function Login({navigation}) {
 
       <TouchableOpacity
         style={isDisable ? Styles.ButtonDisable : Styles.ButtonEnable}
-        disabled={isDisable}>
+        disabled={isDisable} onPress={login}>
         <View>
           <Text style={Styles.buttonText}>Log in</Text>
         </View>
       </TouchableOpacity>
+
+      {authError?(<Error style={{marginTop:16}}
+          message="credentials are incorrect!"
+        />):null}
+      
 
       <View
         style={{

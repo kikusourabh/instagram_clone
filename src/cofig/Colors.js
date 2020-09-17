@@ -7,6 +7,7 @@ export const Colors = {
   check: '#F58529',
   error: '#FF9494',
   primaryButton: "#3797EF",
-  border: "#C7C7CC"
+  border: "#C7C7CC",
+  inactive: '#A24242',
 
 };

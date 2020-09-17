@@ -5,6 +5,9 @@ import Statusbar from '../components/Statusbar';
 import { Colors } from '../cofig/Colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import PostRoute from '../routes/PostRoute';
+
+
 
 function Profile() {
     return (
@@ -69,6 +72,8 @@ function Profile() {
             </View>
             {/* bio */}
 
+            {/* post */}
+            <PostRoute />
             {/* post */}
 
         </View>

@@ -72,4 +72,37 @@ export const posts = [
         location: 'India',
     },
 
-]   
+]
+
+export const tagPost = [
+    {
+        key: 'post-1',
+        postUrl: "https://images.unsplash.com/photo-1583265651635-4955d322771f?ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+        caption: "mountain",
+        location: 'mountain view',
+    },
+    {
+        key: 'post-2',
+        postUrl: "https://images.unsplash.com/photo-1599839575509-b15589e78aa3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
+        caption: "pet",
+        location: 'studio',
+    },
+    {
+        key: 'post-3',
+        postUrl: "https://images.unsplash.com/photo-1581318540937-12df1816d795?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1368&q=80",
+        caption: "abstract",
+        location: 'illustrator',
+    },
+    {
+        key: 'post-4',
+        postUrl: "https://images.unsplash.com/photo-1599860968018-b3b108029a37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
+        caption: "building",
+        location: 'New york',
+    },
+    {
+        key: 'post-5',
+        postUrl: "https://images.unsplash.com/photo-1532020326606-ca3ae703dd24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=361&q=80",
+        caption: "beach",
+        location: 'Calafornia',
+    },
+]

@@ -8,6 +8,6 @@ export const Colors = {
   error: '#FF9494',
   primaryButton: "#3797EF",
   border: "#C7C7CC",
-  inactive: '#A24242',
+  inactive: '#969696',
 
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import PostsGrid from '../screens/PostsGrid';
-import PostTagGrid from '../screens/PostTagGrid';
+import PostTagGrid from "../screens/PostTagGrid";
+import PostsGrid from "../screens/PostsGrid";
 import { Colors } from '../cofig/Colors';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 

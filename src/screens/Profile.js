@@ -9,7 +9,13 @@ import PostRoute from '../routes/PostRoute';
 
 
 
-function Profile() {
+function Profile({ navigation }) {
+    const editProfile = () => {
+        navigation.navigate('EditProfile');
+    }
+    const navFriends = () => {
+        navigation.navigate('Friends');
+    }
     return (
         <View style={[Styles.windowBackground]}>
             <Statusbar />
@@ -36,17 +42,21 @@ function Profile() {
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 2, flexDirection: 'row', marginEnd: 16 }}>
-                    <View style={styles.profileCountsContainer}>
+                    <View style={[styles.profileCountsContainer, { justifyContent: 'center', alignItems: 'center' }]}>
                         <Text style={styles.profileCounts}>45</Text>
                         <Text style={styles.profileCountsText}>Posts</Text>
                     </View>
-                    <View style={styles.profileCountsContainer}>
-                        <Text style={styles.profileCounts}>834</Text>
-                        <Text style={styles.profileCountsText} >Followers</Text>
+                    <View style={styles.profileCountsContainer} >
+                        <TouchableOpacity style={styles.profileCountTouch} onPress={navFriends}>
+                            <Text style={styles.profileCounts}>834</Text>
+                            <Text style={styles.profileCountsText} >Followers</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.profileCountsContainer}>
-                        <Text style={styles.profileCounts}>162</Text>
-                        <Text style={styles.profileCountsText}>Following</Text>
+                        <TouchableOpacity style={styles.profileCountTouch} onPress={navFriends}>
+                            <Text style={styles.profileCounts}>162</Text>
+                            <Text style={styles.profileCountsText}>Following</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -64,7 +74,7 @@ function Profile() {
                         https://reactnative.dev/docs/image/
                 </Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={editProfile}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', width: "90%", height: 40, borderWidth: 1, alignSelf: 'center', marginTop: 8, borderRadius: 10, borderColor: Colors.border }}>
                         <Text style={{ color: Colors.acent, fontWeight: 'bold' }}>Edit profile</Text>
                     </View>
@@ -85,6 +95,8 @@ export default Profile;
 const styles = StyleSheet.create({
     profileCountsContainer: {
         flex: 1,
+    },
+    profileCountTouch: {
         justifyContent: 'center',
         alignItems: 'center'
     },

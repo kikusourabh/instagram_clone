@@ -5,12 +5,13 @@ import Feeds from '../screens/Feeds';
 import Search from '../screens/Search';
 import AddPost from '../screens/AddPost';
 import ActivityList from '../screens/ActivityList';
-import Profile from '../screens/Profile';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IOIcon from 'react-native-vector-icons/Ionicons';
 import FIcon from 'react-native-vector-icons/Feather';
 import FWIcon from 'react-native-vector-icons/FontAwesome';
 import { Colors } from '../cofig/Colors';
+import ProfileRoute from './ProfileRoute';
+import Profile from '../screens/Profile';
 
 
 const Tab = createBottomTabNavigator();
@@ -50,7 +51,7 @@ function HomeRoute() {
                             return <IOIcon name={iconname} size={size} color={color} />
 
                         }
-                        if (route.name === "Profile") {
+                        if (route.name === "ProfileRoute") {
                             // FontAwsome
                             focused ?
                                 iconname = "user-circle" :
@@ -72,7 +73,7 @@ function HomeRoute() {
                 <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen name="AddPost" component={AddPost} />
                 <Tab.Screen name="ActivityList" component={ActivityList} />
-                <Tab.Screen name="Profile" component={Profile} />
+                <Tab.Screen name="ProfileRoute" component={ProfileRoute} />
             </Tab.Navigator>
         </NavigationContainer>
 

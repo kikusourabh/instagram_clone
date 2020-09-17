@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Colors} from './Colors';
+import { StyleSheet } from 'react-native';
+import { Colors } from './Colors';
 
 export const Styles = StyleSheet.create({
   windowBackground: {
@@ -16,7 +16,7 @@ export const Styles = StyleSheet.create({
     width: '80%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.acent,
+    backgroundColor: Colors.primaryButton,
     borderRadius: 5,
   },
   ButtonDisable: {
@@ -48,4 +48,15 @@ export const Styles = StyleSheet.create({
     paddingStart: 16,
     paddingEnd: 16,
   },
+  actionBarShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.00,
+
+    elevation: 1,
+  }
 });

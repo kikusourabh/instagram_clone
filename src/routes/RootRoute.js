@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import AuthRoute from './AuthRoute';
-import HomeRoute from './HomeRoute';
+import HomeStackRoute from './HomeStackRoute';
 
 function RootRoute() {
     const loginToken = useSelector(state => state.Auth.token);
@@ -14,9 +14,7 @@ function RootRoute() {
         );
     } else {
         return (
-
-            <HomeRoute />
-
+            <HomeStackRoute />
         );
     }
 
